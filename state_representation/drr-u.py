@@ -34,6 +34,8 @@ class InnerProductLayer(nn.Module):
         embed_list = torch.matmul(self.W, embed_list)
         embed_list = embed_list.unsqueeze(1)
 
+        # create all pairs of item embeddings
+        #and after that multiply element-wise
         for i in range(num_inputs - 1):
             for j in range(i + 1, num_inputs):
                 row.append(i)
@@ -44,6 +46,7 @@ class InnerProductLayer(nn.Module):
         q = torch.cat([embed_list[idx]
                        for idx in col], dim=1)
 
+        #multiply element-wise the user embedding with all items
         u = user * embed_list
 
         inner_product = p * q
