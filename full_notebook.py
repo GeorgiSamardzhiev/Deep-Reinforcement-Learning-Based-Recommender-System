@@ -476,7 +476,7 @@ class Recommender:
     if top_k:
       product = torch.mm(item_ebs, action)
       item_idx = torch.argsort(product, axis=0,descending=True)[-top_k:]
-      return torch.index_select(torch.Tensor(items), 0, item_idx.flatten()) # Here we need to get the numbers
+      return torch.index_select(torch.Tensor(items), 0, item_idx.flatten()).numpy()
     else:
       product = torch.mm(item_ebs, action)
       item_idx = torch.argmax(product, axis=0)
