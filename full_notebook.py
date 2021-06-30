@@ -452,10 +452,10 @@ class Recommender:
 
     self.actor = Actor(self.EMBEDDING_DIM, self.ACTOR_HIDDEN_DIM, self.state_size, self.ACTOR_LR, self.TAU)
     self.critic = Critic(self.EMBEDDING_DIM, self.CRITIC_HIDDEN_DIM, self.state_size, self.CRITIC_LR, self.TAU)
-    # self.actor.local_network.load_state_dict(torch.load('actor_local'))
-    # self.actor.target_network.load_state_dict(torch.load('actor_target'))
-    # self.critic.local_network.load_state_dict(torch.load('critic_local'))
-    # self.critic.target_network.load_state_dict(torch.load('critic_target'))
+    self.actor.local_network.load_state_dict(torch.load('actor_local'))
+    self.actor.target_network.load_state_dict(torch.load('actor_target'))
+    self.critic.local_network.load_state_dict(torch.load('critic_local'))
+    self.critic.target_network.load_state_dict(torch.load('critic_target'))
 
     self.embedding_network = UserMovieEmbedding(max(self.users)+1, max(self.items)+1, self.EMBEDDING_DIM)
     self.embedding_network.load_state_dict(torch.load('saved_concat_model'))
