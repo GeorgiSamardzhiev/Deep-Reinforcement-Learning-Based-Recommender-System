@@ -68,7 +68,7 @@ class Env:
     else:
       reward = self.get_reward(action)
 
-    if step >= self.done_count-1 or len(self.recommended_items) >= self.users_history_lens[self.user]: #-1??
+    if step >= self.done_count-1 or len(self.recommended_items) >= self.users_history_lens[self.user-1]:
       self.done = True
 
     return step+1, self.items, reward, self.done, self.recommended_items
