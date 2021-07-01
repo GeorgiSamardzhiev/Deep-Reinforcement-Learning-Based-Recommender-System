@@ -435,6 +435,8 @@ class DrrAveState(nn.Module):
     def forward(self, item_embeddings, user_embedding):
         drr_ave = self.conv(item_embeddings)
         drr_ave = self.avg_pool(drr_ave).squeeze(1).T
+        diff = torch.ones([drr_ave.shape[0], 100-drr_ave.shape])
+        drr_ave = torch.cat((drr_ave.squeeze(0), diff.squeeze(0)), 0).unsqueeze(0)
         return torch.cat((user_embedding, torch.mul(user_embedding, drr_ave), drr_ave), 1)
 
 class Recommender:
